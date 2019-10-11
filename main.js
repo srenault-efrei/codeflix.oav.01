@@ -1,37 +1,39 @@
-const path = require("path") // pour afficher le chemin du fichier 
-const fs = require("fs") // pour lire dans un fichier 
-const ini = require('data/parseIni') // on appelle le fichie
+const path = require("path");// module des chemins
+const fs = require("fs");// module du fichier
+const parseIni = require("./parseIni")
+const parseEnv = require("./parseEnv")
 
-const args = process.argv.slice(2) // recupere les arguments
-console.log(args)
+const args = process.argv.slice(2); // recupere les argss
 
+//verifie le nombre arg
 
-// verifie si on a inscrit le bon nombre d'arguments
-if (args.lenght !== 1) {
-    console.log("Usage : node main.js <CONFIG_FILENAME>")
-    process.exit(0) // valeur de retour pour quitter l'application
+if (args.length !== 1) {
+    console.log("usage: node main.js <CONFIG_FILENAME>");
+    process.exit(0)
 }
 else {
 
     const filename = args[0];
+    //Step1 : check if extension is .env or .ini
 
-    console.log(path.extraname(filename)); // affiche .xx du fichier 
-
-
-    // step 1 : check if extension is .env or .ini  A FAIRE 
-    if (fs.existsSync(filename)) {
-        console.log("le fichier n'existe pas")
-        process.exit(0)
+    if (!fs.existsSync(filename)) {
+        console.log(`The file ${filename} does not exist.`);
+        process.exit(-1)
     }
 
-    // step 2 : lire le contenu 
+    else{
+// faire un slice pour recupere le .extension et  pointe sur le fichier .extension
+        let extension = path.extname(filename); // affiche .xx du fichier 
+        const content = fs.readFileSync(filename, "utf-8");
 
-    let content = fs.readFileSync(filename, 'utf-8')
-    console.log(content);
-
-    // step 3 : parcourir les caracteres ou faire un REGEX , utiliser le site REGEX
-
+        if(extension == ''){
+            console.log(parseEnv(content))
+        }
+        else if (extension == '.ini'){
+            parseIni(content)
+        }
+      
+    }
+    
 }
 
-
-// RGEX : ^([\w]+) -> recupere les clefs dans env
