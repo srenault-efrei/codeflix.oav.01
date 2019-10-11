@@ -30,10 +30,7 @@ module.exports = function parseEnv(content) {
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;
-        console.log('File ' + newFile + ' has been successfully created');
     });
 
+    return 'File ' + newFile + ' has been successfully created'
 }
-/*
- - years
- */
