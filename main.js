@@ -30,10 +30,9 @@ else {
             console.log(parseEnv(content))
         }
         else if (extension == '.ini'){
-            parseIni(content)
+            console.log(parseIni(content))
         }
       
     }
     
 }
-
