@@ -154,19 +154,19 @@
             "default_socket_timeout": "60"
         },
         {
-            "extension": "imap"
+            "extension": "imap.so"
         },
         {
-            "extension": "mcrypt"
+            "extension": "mcrypt.so"
         },
         {
-            "extension": "gettext"
+            "extension": "gettext.so"
         },
         {
-            "extension": "pgsql"
+            "extension": "pgsql.so"
         },
         {
-            "extension": "pdo_pgsql"
+            "extension": "pdo_pgsql.so"
         }
     ],
     "Date": [
@@ -493,7 +493,14 @@
     "Crack": [],
     "exif": [],
     "xcache-common": [],
-    "xcache.admin": [],
+    "xcache.admin": [
+        {
+            "xcache.admin.user": "\"xcache\""
+        },
+        {
+            "xcache.admin.pass": "\"8e6867a5d05144cf4761d6481fc674a8\""
+        }
+    ],
     "xcache": [
         {
             "xcache.shm_scheme": "\"mmap\""

@@ -3,7 +3,7 @@ module.exports = function parseIni(content) {
     // on lit un contenu ligne par ligne et on evite les commentaires
     // split pour couper
     const lines = content.split("\n")
-    const regexContent = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*)=([\s]+".+|[\s]+\/.+|[\s]+-[0-9]|[\s]*[\w]+|([\s]$)+|[\w]+\.[\w]+|(?!.))|^(\[.+\])/g
+    const regexContent = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*|[\w]+\.[\w]+\.+[\w]+[\s]+)=([\s]+".+|[\s]+\/.+|[\s]+-[0-9]|[\s]+[\w]+|([\s]$)+|[\w]+\.[\w]+|(?!.))|^(\[.+\])/g
      const reg = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*)=[\s](?!.)/g
 
 
@@ -24,6 +24,7 @@ module.exports = function parseIni(content) {
             // console.log(matchLine)
             // console.log(matchLine[0])
             if (matchLine[0].includes('[')) {
+                console.log(matchLine[0])
                 category = matchLine[0].replace(/(^\[|\]$)/g, "")
                 //    console.log(category)
                 tabObject = []
@@ -32,7 +33,7 @@ module.exports = function parseIni(content) {
             } else {
                 
                 let arraySeparator = matchLine[0].split('=')
-                console.log(arraySeparator)
+               
                 let key = arraySeparator[0].trim()
                 let value = arraySeparator[1].trim()
                 let objectCategory = {}
