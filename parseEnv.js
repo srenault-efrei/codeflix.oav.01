@@ -5,7 +5,6 @@ module.exports = function parseEnv(content) {
     let object = {}
     let regex = /^([\w]+)=(.+)/g
     const lines = content.split("\n")
-    let message = ''
 
 
     for (const line of lines) {
@@ -14,8 +13,8 @@ module.exports = function parseEnv(content) {
             let arraySeparator = matchLine[0].split('=')
             object[arraySeparator[0]] = arraySeparator[1]
         }
-
     }
+
     let date = new Date();
     let fullDate = '';
     if (date.getMonth() <= 9) {
@@ -23,7 +22,6 @@ module.exports = function parseEnv(content) {
     } else {
         fullDate = date.getFullYear() + '' + date.getMonth() + '' + date.getDay() + '' + date.getMinutes() + '' + date.getSeconds() + '' + date.getMilliseconds();
     }
-
 
     let data = JSON.stringify(object, null, 4)
     let newFile = "env." + fullDate + '.json'
