@@ -1,4 +1,4 @@
-module.exports = function createNewFile (str){
+module.exports = function nameFile (str){
     let date = new Date();
     let character = ''
 
