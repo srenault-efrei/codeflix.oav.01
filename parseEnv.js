@@ -16,13 +16,12 @@ module.exports = function parseEnv(content) {
         }
     }
 
-   let newFile = nameFile("env.")
-
+    let newFile = nameFile("env.")
     let data = JSON.stringify(object, null, 4)
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;
     });
 
-    return 'File ' + newFile + ' has been successfully created'
+    return 'File `' + newFile + '` has been successfully created'
 }

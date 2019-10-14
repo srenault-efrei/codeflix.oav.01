@@ -18,7 +18,7 @@ else {
         process.exit(-1)
     }
     else {
-        let extension = path.extname(filename); 
+        let extension = path.extname(filename);
         const content = fs.readFileSync(filename, "utf-8");
 
         if (extension == '') {

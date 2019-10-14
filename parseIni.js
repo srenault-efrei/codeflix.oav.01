@@ -1,5 +1,5 @@
 const fs = require("fs");
-const nameFile = require("./helper")
+const newFileName = require("./helper")
 
 module.exports = function parseIni(content) {
 
@@ -38,13 +38,13 @@ module.exports = function parseIni(content) {
             finalArray[category] = tabObject
         }
     }
-    let newFile = nameFile("php.")
+    let newFile = newFileName("php.")
     let data = JSON.stringify(finalArray, null, 2)
-    
+
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;
     });
 
-    return 'File ' + newFile + ' has been successfully created'
+    return 'File `' + newFile + '` has been successfully created'
 }
