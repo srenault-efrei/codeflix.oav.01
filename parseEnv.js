@@ -1,4 +1,5 @@
 const fs = require("fs");
+const createNewFile = require("./helper")
 
 module.exports = function parseEnv(content) {
 
@@ -15,16 +16,9 @@ module.exports = function parseEnv(content) {
         }
     }
 
-    let date = new Date();
-    let fullDate = '';
-    if (date.getMonth() <= 9) {
-        fullDate = date.getFullYear() + '' + '0' + date.getMonth() + '' + date.getDay() + '' + date.getMinutes() + '' + date.getSeconds() + '' + date.getMilliseconds();
-    } else {
-        fullDate = date.getFullYear() + '' + date.getMonth() + '' + date.getDay() + '' + date.getMinutes() + '' + date.getSeconds() + '' + date.getMilliseconds();
-    }
+   let newFile = createNewFile("env.")
 
     let data = JSON.stringify(object, null, 4)
-    let newFile = "env." + fullDate + '.json'
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;

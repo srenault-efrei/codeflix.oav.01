@@ -1,4 +1,5 @@
 const fs = require("fs");
+const createNewFile = require("./helper")
 
 module.exports = function parseIni(content) {
 
@@ -37,9 +38,9 @@ module.exports = function parseIni(content) {
             finalArray[category] = tabObject
         }
     }
-
-    let data = JSON.stringify(final, null, 2)
-    let newFile = 'phpParse.json'
+    let newFile = createNewFile("php.")
+    let data = JSON.stringify(finalArray, null, 2)
+    
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;
