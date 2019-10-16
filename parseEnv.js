@@ -1,5 +1,5 @@
 const fs = require("fs");
-const nameFile = require("./helper")
+const newFileName = require("./helper")
 
 module.exports = function parseEnv(content) {
 
@@ -16,7 +16,7 @@ module.exports = function parseEnv(content) {
         }
     }
 
-    let newFile = nameFile("env.")
+    let newFile = newFileName("env.")
     let data = JSON.stringify(object, null, 4)
 
     fs.writeFile(newFile, data, (err) => {

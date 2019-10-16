@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const parseIni = require("./parseIni")
 const parseEnv = require("./parseEnv")
+const parseYml = require("./parseYml")
 
 const args = process.argv.slice(2);
 
@@ -26,6 +27,9 @@ else {
         }
         else if (extension == '.ini') {
             console.log(parseIni(content))
+        }
+        else if (extension == '.yml') {
+            console.log(parseYml(content))
         }
     }
 }

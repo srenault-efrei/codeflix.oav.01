@@ -4,27 +4,28 @@ const newFileName = require("./helper")
 module.exports = function parseIni(content) {
 
     const lines = content.split("\n")
-    const regexContent = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*|[\s]+[\w]+\.[\w]+|[\w]+\.[\w]+\.+[\w]+[\s]+)=([\s]*".+|[\s]+\/.+|[\s]+-[0-9]|[\s]+[\w]+|([\s]$)+|[\w]+\.[\w]+|(?!.)|[\s]*\/)|^(\[.+\])/g
+    const regex = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*|[\s]+[\w]+\.[\w]+|[\w]+\.[\w]+\.+[\w]+[\s]+)=([\s]*".+|[\s]+\/.+|[\s]+-[0-9]|[\s]+[\w]+|([\s]$)|[\w]+\.[\w]+|(?!.)|[\s]*\/)|^(\[.+\])/g
+    const regexException = /^([\w]+\.[\w]+[\s])=[\s]"[\w]=.+/g
 
     let tabObject = []
     let key = ""
     let value = ""
-    let finalArray = {}
+    let finalObject = {}
     let category = ''
 
 
     for (const line of lines) {
 
-        let matchLine = line.match(regexContent)
+        let matchLine = line.match(regex)
         if (matchLine != null) {
             if (matchLine[0].includes('[')) {
                 category = matchLine[0].replace(/(^\[|\]$)/g, "")
                 tabObject = []
             } else {
-                let exceptionObject = "url_rewriter.tags = \"a=href,area=href,frame=src,input=src,form=,fieldset=\""
-                if (matchLine[0] == exceptionObject) {
-                    key = exceptionObject.slice(0, 17)
-                    value = exceptionObject.slice(20)
+                //url_rewriter.tags = "a=href,area=href,frame=src,input=src,form=,fieldset="
+                if (matchLine[0].match(regexException)) {
+                    key = matchLine[0].slice(0, matchLine[0].indexOf("=")).trim();
+                    value = matchLine[0].slice(matchLine[0].indexOf("\""), matchLine[0].length)
                 }
                 else {
                     let arraySeparator = matchLine[0].split('=')
@@ -35,12 +36,11 @@ module.exports = function parseIni(content) {
                 objectCategory[key] = value
                 tabObject.push(objectCategory)
             }
-            finalArray[category] = tabObject
+            finalObject[category] = tabObject
         }
     }
     let newFile = newFileName("php.")
-    let data = JSON.stringify(finalArray, null, 2)
-
+    let data = JSON.stringify(finalObject, null, 2)
 
     fs.writeFile(newFile, data, (err) => {
         if (err) throw err;
