@@ -4,7 +4,7 @@ const newFileName = require("./helper")
 module.exports = function parseIni(content) {
 
     const lines = content.split("\n")
-    const regex = /^([\w]+[\s]*|[\w]+\.[\w]+[\s]*|[\s]+[\w]+\.[\w]+|[\w]+\.[\w]+\.+[\w]+[\s]+)=([\s]*".+|[\s]+\/.+|[\s]+-[0-9]|[\s]+[\w]+|([\s]$)|[\w]+\.[\w]+|(?!.)|[\s]*\/)|^(\[.+\])/g
+    const regex = /^([\s]*[\w]+\.*[\w]*\.*[\w]*[\s]*)=([\s]*".+|[\s]+\/.+|[\s]+-[0-9]|[\s]+[\w]+|[\w]+\.[\w]+|(?!.)|[\s]*\/)|^(\[.+\])/g
     const regexException = /^([\w]+\.[\w]+[\s])=[\s]"[\w]=.+/g
 
     let tabObject = []

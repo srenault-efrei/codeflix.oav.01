@@ -11,7 +11,6 @@ module.exports = function parseYml(content) {
 
     const lines = content.split("\n")
     const regex = /^([\s]*[\w]+):([\s]'*[\w]*\\*[\w]*'*|^[\s]+|(?!.))/g
-    const regexOption = /^([\s]+[\w]+)/g
 
     for (const line of lines) {
         let matchLine = line.match(regex)
@@ -21,17 +20,14 @@ module.exports = function parseYml(content) {
             key = matchline[0]
             value = matchline[1].trim()
 
-            //  console.log(value)
-
             if (value === '') {
                 tabObject = []
                 global = key
             }
-           
             else {
                 let object = {}
                 object[key] = value
-                tabObject.push(object)     
+                tabObject.push(object)
             }
             finalObject[global] = tabObject
         }
